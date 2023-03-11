@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class ListManager : MonoBehaviour
 {
+	public int currentListDifficulty = 2;
+
 	[SerializeField] GroceryObject[] groceryPool;
 	public GroceryObject[] currentList;
 	public bool[] currentListCheckedOff;
@@ -14,8 +16,7 @@ public class ListManager : MonoBehaviour
 
 	private void Start()
 	{
-		GenerateNewShoppingList(2);
-		groceryUIManager.SetListUI(currentList);
+		GenerateNewShoppingList(currentListDifficulty);
 	}
 
 	// Making New List
@@ -41,6 +42,8 @@ public class ListManager : MonoBehaviour
 
 		currentListCheckedOff = new bool[shoppingListSize];
 		currentList =  newList.ToArray();
+		groceryUIManager.SetListUI(currentList);
+
 	}
 	List<GroceryObject> GetGroceryPoolCopy()
 	{
@@ -90,5 +93,11 @@ public class ListManager : MonoBehaviour
 	public bool CheckListComplete()
 	{
 		return currentListCheckedOff.All(e => e);
+	}
+
+	public void MakeHarderList()
+	{
+		currentListDifficulty = Math.Min(currentListDifficulty + 1, 6);
+		GenerateNewShoppingList(currentListDifficulty);
 	}
 }

@@ -29,6 +29,8 @@ public class GroceryListUIManager : MonoBehaviour
 		foreach(ListItemUI listItemUI in listItems)
 		{
 			listItemUI.gameObject.SetActive(false);
+			listItemUI.CheckOff(false);
+
 		}
 	}
 }

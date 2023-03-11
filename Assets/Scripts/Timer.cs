@@ -7,6 +7,7 @@ using UnityEngine;
 public class Timer : MonoBehaviour
 {
 	[SerializeField] TMP_Text timerText;
+	[SerializeField] GameManager gameManager;
 	public float timeRemainingSeconds = 60;
 
 	public float listCompletionBonus = 20;
@@ -20,6 +21,7 @@ public class Timer : MonoBehaviour
 		else
 		{
 			timerText.text = "GAME OVER";
+			gameManager.GameOver = true;
 		}
 	}
 
@@ -29,5 +31,10 @@ public class Timer : MonoBehaviour
 		int seconds = (int)time - (minutes* 60);
 
 		return $"{minutes} : {seconds}";
+	}
+
+	public void AddCompletionBonus()
+	{
+		timeRemainingSeconds += listCompletionBonus; 
 	}
 }
