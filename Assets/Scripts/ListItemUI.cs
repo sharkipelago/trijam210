@@ -14,4 +14,12 @@ public class ListItemUI : MonoBehaviour
 		itemImage.sprite = groceryObject.Sprite;
 		itemText.text= groceryObject.name;
 	}
+	
+	public void CheckOff(bool shouldBeCheckedOff)
+	{
+		Color color = itemImage.color;
+		color.a = shouldBeCheckedOff ? 0.5f : 1f;
+
+		itemImage.color = color;
+	}
 }

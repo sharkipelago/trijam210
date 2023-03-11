@@ -7,13 +7,15 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Rigidbody2D _rb2d;
     [SerializeField] float _speed = 1;
 
-    [SerializeField] List<GroceryItem> heldGroceries;
+    public List<GroceryObject> heldGroceries;
     [SerializeField] ProduceCrate _currentCrate;
+
+    [SerializeField] ListManager listManager;
 
     // Start is called before the first frame update
     void Start()
     {
-        heldGroceries = new List<GroceryItem>();
+        heldGroceries = new List<GroceryObject>();
         _currentCrate = null;
     }
 
@@ -43,9 +45,6 @@ public class PlayerController : MonoBehaviour
 		{
 			_currentCrate = triggeredCrate;
 		}
-
-
-
 	}
 
 	private void OnTriggerExit2D(Collider2D other)
@@ -58,8 +57,15 @@ public class PlayerController : MonoBehaviour
         }
 	}
 
-	void PickupGroccery(GroceryItem newItem)
+	void PickupGroccery(GroceryObject newItem)
     {
+        if(listManager.ListHasItem(newItem)) { return; }
         heldGroceries.Add(newItem);
+        listManager.TryCheckOffListItem(newItem);
+    }
+
+    public void ClearHeldGroceries()
+    {
+        heldGroceries.Clear();
     }
 }

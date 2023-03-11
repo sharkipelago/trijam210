@@ -5,12 +5,9 @@ using UnityEngine;
 [System.Serializable]
 public class GroceryItem 
 {
-	public string Name;
-	public Sprite Sprite;
-
-	public GroceryItem(string name, Sprite sprite)
+	public GroceryObject groceryData;
+	public GroceryItem(GroceryObject groceryObject)
 	{
-		Name = name;
-		Sprite = sprite;
+		groceryData = groceryObject;
 	}
 }

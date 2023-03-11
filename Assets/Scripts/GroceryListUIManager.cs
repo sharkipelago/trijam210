@@ -16,6 +16,14 @@ public class GroceryListUIManager : MonoBehaviour
 		}
 	}
 
+	public void UpdateCheckedOff(bool[] listCheckedOffStatus)
+	{
+		for (int i = 0; i < listCheckedOffStatus.Length; i++)
+		{
+			listItems[i].CheckOff(listCheckedOffStatus[i]);
+		}
+	}
+
 	void ClearListUI()
 	{
 		foreach(ListItemUI listItemUI in listItems)

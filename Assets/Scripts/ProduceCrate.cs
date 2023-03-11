@@ -11,10 +11,10 @@ public class ProduceCrate : MonoBehaviour
         
     }
 
-    public GroceryItem GetGroccery()
+    public GroceryObject GetGroccery()
     {	
         if (_groceryObject == null)
             Debug.LogWarning(name + ": _groceryObject field not set!");
-        return new GroceryItem(_groceryObject.name, _groceryObject.Sprite);
+        return _groceryObject;
 	}
 }
