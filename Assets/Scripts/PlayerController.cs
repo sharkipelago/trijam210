@@ -44,6 +44,8 @@ public class PlayerController : MonoBehaviour
 			_currentCrate = triggeredCrate;
 		}
 
+
+
 	}
 
 	private void OnTriggerExit2D(Collider2D other)

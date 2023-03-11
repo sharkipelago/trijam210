@@ -15,6 +15,6 @@ public class ProduceCrate : MonoBehaviour
     {	
         if (_groceryObject == null)
             Debug.LogWarning(name + ": _groceryObject field not set!");
-        return new GroceryItem(_groceryObject.Name, _groceryObject.Sprite);
+        return new GroceryItem(_groceryObject.name, _groceryObject.Sprite);
 	}
 }
