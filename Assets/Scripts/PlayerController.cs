@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,7 +6,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] Rigidbody2D _rb2d;
-    [SerializeField] float _speed = 1;
+    [SerializeField] float _speed = 2;
 
     public List<GroceryObject> heldGroceries;
     [SerializeField] ProduceCrate _currentCrate;
@@ -23,12 +24,16 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         //Movement
-		Vector2 inputVelocity = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")) * _speed; 
+		Vector2 inputVelocity = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")) * _speed;
+        if(inputVelocity.Equals(Vector2.zero))
+        {
+            _rb2d.velocity = Vector2.zero;
+        }
+		_rb2d.velocity = inputVelocity;
 
-        _rb2d.AddForce(inputVelocity);
 
-		//Pickingup Grocceries
-		if (_currentCrate != null)
+        //Pickingup Grocceries
+        if (_currentCrate != null)
         {
 			if (Input.GetKeyDown(KeyCode.P))
 			{
