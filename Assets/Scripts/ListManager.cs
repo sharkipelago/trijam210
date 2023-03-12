@@ -89,6 +89,11 @@ public class ListManager : MonoBehaviour
 		return currentListCheckedOff[groceryIndex];
 	}
 
+	public GroceryObject GetRandomGrocery()
+	{
+		return currentList[UnityEngine.Random.Range(0, currentList.Length)];
+	}
+
 	// Checking List Compleete
 	public bool CheckListComplete()
 	{

@@ -8,6 +8,7 @@ public class Register : MonoBehaviour
 	[SerializeField] ListManager listManager;
 	[SerializeField] Timer timer;
 	[SerializeField] GameManager gameManager;
+	[SerializeField] DistractingShopper[] shoppers;
  
 	int completedLists = 0;
 
@@ -20,10 +21,10 @@ public class Register : MonoBehaviour
 			if (listManager.CheckListComplete())
 			{
 				Debug.Log("COMPLETED!");
-				player.ClearHeldGroceries();
 				completedLists++;
 				timer.AddCompletionBonus();
 				listManager.MakeHarderList();
+				UpdateShoppersDesiredGrocery();
 				return;
 			}
 
@@ -32,5 +33,12 @@ public class Register : MonoBehaviour
 		}
 	}
 
+	private void UpdateShoppersDesiredGrocery()
+	{
+		foreach(DistractingShopper shopper in shoppers)
+		{
+			shopper.OnPlayerCompletesList();
+		}
+	}
 
 }

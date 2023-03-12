@@ -5,18 +5,20 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] Rigidbody2D _rb2d;
+    public Rigidbody2D _rb2d;
+    public bool beingShoved = false;
+    public float shoveTimeWindow = 1.5f;
+    public float currentShove = 0;
     [SerializeField] float _speed = 2;
 
-    public List<GroceryObject> heldGroceries;
     [SerializeField] ProduceCrate _currentCrate;
+    [SerializeField] DistractingShopper _currentShopper;
 
     [SerializeField] ListManager listManager;
 
     // Start is called before the first frame update
     void Start()
     {
-        heldGroceries = new List<GroceryObject>();
         _currentCrate = null;
     }
 
@@ -24,24 +26,49 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         //Movement
-		Vector2 inputVelocity = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")) * _speed;
-        if(inputVelocity.Equals(Vector2.zero))
+        if (beingShoved)
         {
-            _rb2d.velocity = Vector2.zero;
+            currentShove -= Time.deltaTime;
+            if(currentShove < 0) { 
+                beingShoved = false;
+                currentShove = 0;
+            }
         }
-		_rb2d.velocity = inputVelocity;
+        else
+        {
+			Vector2 inputVelocity = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")) * _speed;
+			if (inputVelocity.Equals(Vector2.zero))
+			{
+				_rb2d.velocity = Vector2.zero;
+			}
+			_rb2d.velocity = inputVelocity;
+
+		}
 
 
-        //Pickingup Grocceries
-        if (_currentCrate != null)
+		//Pickingup Grocceries
+		if (_currentCrate != null)
         {
 			if (Input.GetKeyDown(KeyCode.P))
 			{
                 PickupGroccery(_currentCrate.GetGroccery());
 			}
 		}
+        if(_currentShopper != null)
+        {
+            if (Input.GetKeyDown(KeyCode.O))
+            {
+                GiveGroceryToShopper();
+            }
+        }
 
 
+    }
+
+    public void OnShoved()
+    {
+        beingShoved = true;
+        currentShove = shoveTimeWindow;
     }
     
 	private void OnTriggerEnter2D(Collider2D other)
@@ -50,27 +77,42 @@ public class PlayerController : MonoBehaviour
 		{
 			_currentCrate = triggeredCrate;
 		}
+        if (other.TryGetComponent(out DistractingShopper triggeredShopper))
+        {
+            _currentShopper = triggeredShopper;
+            _currentShopper.OnAskedDesiredGrocery();
+        }
 	}
 
 	private void OnTriggerExit2D(Collider2D other)
 	{
-		if (!other.TryGetComponent(out ProduceCrate triggeredCrate)) { return; }
+		if (other.TryGetComponent(out ProduceCrate triggeredCrate))
+		{
+			if (triggeredCrate.Equals(_currentCrate))
+			{
+				_currentCrate = null;
+			}
+		}
+		if (other.TryGetComponent(out DistractingShopper triggeredShopper))
+		{
+			if (triggeredShopper.Equals(_currentShopper))
+			{
+				_currentShopper = null;
+			}
+		}
 
-        if(triggeredCrate.Equals(_currentCrate))
-        {
-            _currentCrate = null;
-        }
+
 	}
 
 	void PickupGroccery(GroceryObject newItem)
     {
         if(listManager.ListHasItem(newItem)) { return; }
-        heldGroceries.Add(newItem);
         listManager.TryCheckOffListItem(newItem);
     }
 
-    public void ClearHeldGroceries()
+    void GiveGroceryToShopper()
     {
-        heldGroceries.Clear();
+        _currentShopper.TryGiveGrocery();
     }
+
 }
