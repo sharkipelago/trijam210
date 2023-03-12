@@ -85,6 +85,8 @@ public class DistractingShopper : MonoBehaviour
 		{
 			Color c = GetComponent<SpriteRenderer>().color;
 			c.r += .2f;
+			c.b += .15f;
+			c.g += .15f;
 			GetComponent<SpriteRenderer>().color = c;
 			angerLevel++;
 			//Play Annoyed Audio

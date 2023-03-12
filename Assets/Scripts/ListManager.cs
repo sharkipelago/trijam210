@@ -8,7 +8,7 @@ public class ListManager : MonoBehaviour
 {
 	public int currentListDifficulty = 2;
 
-	[SerializeField] GroceryObject[] groceryPool;
+	public GroceryObject[] groceryPool;
 	public GroceryObject[] currentList;
 	public bool[] currentListCheckedOff;
 
@@ -45,7 +45,7 @@ public class ListManager : MonoBehaviour
 		groceryUIManager.SetListUI(currentList);
 
 	}
-	List<GroceryObject> GetGroceryPoolCopy()
+	public List<GroceryObject> GetGroceryPoolCopy()
 	{
 		List<GroceryObject> copy = new List<GroceryObject>();
 		foreach (GroceryObject groceryObject in groceryPool)

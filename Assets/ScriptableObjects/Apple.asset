@@ -12,5 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: baf061e113c1b8240bf51281e113d743, type: 3}
   m_Name: Apple
   m_EditorClassIdentifier: 
-  Name: Apple
-  Sprite: {fileID: 254666115, guid: d139b1f51d0bec34fb53553da2b948a7, type: 3}
+  Sprite: {fileID: 21300000, guid: c72a73fa7ce3d274b9ad33e3e8e95daf, type: 3}

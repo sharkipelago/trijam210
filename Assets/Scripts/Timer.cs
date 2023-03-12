@@ -21,7 +21,7 @@ public class Timer : MonoBehaviour
 		else
 		{
 			timerText.text = "GAME OVER";
-			gameManager.GameOver = true;
+			gameManager.OnGameOver();
 		}
 	}
 

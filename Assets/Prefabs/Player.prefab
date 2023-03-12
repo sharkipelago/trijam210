@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -9095717837082945937, guid: 207ee8102dd4143d288186ef0be518ee, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1d0855b3e563ee64891cc970bebb3b54, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -100,9 +100,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rb2d: {fileID: 1429428287429152238}
+  beingShoved: 0
+  shoveTimeWindow: 1.5
+  currentShove: 0
   _speed: 1
-  heldGroceries: []
   _currentCrate: {fileID: 0}
+  _currentShopper: {fileID: 0}
+  listManager: {fileID: 0}
 --- !u!58 &1429428287429152239
 CircleCollider2D:
   m_ObjectHideFlags: 0

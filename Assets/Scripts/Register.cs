@@ -10,6 +10,7 @@ public class Register : MonoBehaviour
 	[SerializeField] GameManager gameManager;
 	[SerializeField] DistractingShopperManager shopperManager;
 	[SerializeField] DistractingShopper[] shoppers;
+	[SerializeField] ProduceRandomizer produceRandomizer;
  
 	int completedLists = 0;
 
@@ -23,10 +24,12 @@ public class Register : MonoBehaviour
 			{
 				Debug.Log("COMPLETED!");
 				completedLists++;
+				gameManager.clearedRounds = completedLists; 
 				timer.AddCompletionBonus();
 				listManager.MakeHarderList();
 				shopperManager.OnPlayerCompleteList(listManager.currentListDifficulty);
 				UpdateShoppersDesiredGrocery();
+				produceRandomizer.RandomizeProduce();
 				return;
 			}
 
