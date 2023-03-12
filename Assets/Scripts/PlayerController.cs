@@ -95,6 +95,7 @@ public class PlayerController : MonoBehaviour
 		}
 		if (other.TryGetComponent(out DistractingShopper triggeredShopper))
 		{
+            triggeredShopper.OnAskedToShutUp();
 			if (triggeredShopper.Equals(_currentShopper))
 			{
 				_currentShopper = null;

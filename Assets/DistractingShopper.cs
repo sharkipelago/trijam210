@@ -10,10 +10,17 @@ public class DistractingShopper : MonoBehaviour
 	[SerializeField] GroceryObject desiredObject;
 	[SerializeField] PlayerController player;
 	[SerializeField] DistractingShopperManager distractingShopperManager;
+	[SerializeField] GameObject desiredObjectBubble;
 
 	[SerializeField] Collider2D baseCollider;
 	[SerializeField] Collider2D trigger;
 	public Vector3 originalPosition;
+
+	public AudioSource audioSource;
+	public AudioClip hitSound;
+	public AudioClip ascencionSound;
+	public AudioClip angryDogSound;
+
 
 	Vector3 lerpDestination;
 	public int angerLevel = 0;
@@ -24,6 +31,7 @@ public class DistractingShopper : MonoBehaviour
 	{
 		lerpDestination = new Vector3(transform.position.x, transform.position.y + 30, transform.position.z);
 		originalPosition = transform.position;
+		desiredObjectBubble.SetActive(false);
 	}
 
 	// Update is called once per frame
@@ -50,6 +58,7 @@ public class DistractingShopper : MonoBehaviour
 
 	public void OnPlayerCompletesList()
 	{
+		Debug.Log("GETTIGN CALLED");
 		desiredObject = listManager.GetRandomGrocery();
 	}
 
@@ -72,11 +81,14 @@ public class DistractingShopper : MonoBehaviour
 	public void OnAskedDesiredGrocery()
 	{
 		// Hover their grocery over their head
+		desiredObjectBubble.GetComponent<SpriteRenderer>().sprite = desiredObject.Sprite;
+		desiredObjectBubble.SetActive(true);
 	}
 
 	public void OnAskedToShutUp()
 	{
 		//Stop hovering their grocery
+		desiredObjectBubble.SetActive(false);
 	}
 
 	void GetBothered()
@@ -90,11 +102,16 @@ public class DistractingShopper : MonoBehaviour
 			GetComponent<SpriteRenderer>().color = c;
 			angerLevel++;
 			//Play Annoyed Audio
+			audioSource.clip = hitSound;
+			audioSource.Play();
 			return;
 		}
 		else
 		{
+			audioSource.clip = angryDogSound;
+			audioSource.Play();
 			Shove();
+
 		}
 	}
 
@@ -113,8 +130,10 @@ public class DistractingShopper : MonoBehaviour
 		baseCollider.enabled = false;
 		trigger.enabled = false;
 		ascending = true;
+		audioSource.clip = ascencionSound;
+		audioSource.Play();
 		//Play Ascend sound
-		
+
 	}
 
 	

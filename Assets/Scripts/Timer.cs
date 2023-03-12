@@ -30,7 +30,7 @@ public class Timer : MonoBehaviour
 		int minutes = (int)time / 60;
 		int seconds = (int)time - (minutes* 60);
 
-		return $"{minutes} : {seconds}";
+		return (seconds >= 10) ? $"{minutes} : {seconds}" : $"{minutes} : 0{seconds}";
 	}
 
 	public void AddCompletionBonus()

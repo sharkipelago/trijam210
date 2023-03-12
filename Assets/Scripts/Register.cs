@@ -11,7 +11,9 @@ public class Register : MonoBehaviour
 	[SerializeField] DistractingShopperManager shopperManager;
 	[SerializeField] DistractingShopper[] shoppers;
 	[SerializeField] ProduceRandomizer produceRandomizer;
- 
+
+	public AudioSource audioSource;
+
 	int completedLists = 0;
 
 	private void OnTriggerEnter2D(Collider2D collision)
@@ -23,6 +25,7 @@ public class Register : MonoBehaviour
 			if (listManager.CheckListComplete())
 			{
 				Debug.Log("COMPLETED!");
+				audioSource.Play();
 				completedLists++;
 				gameManager.clearedRounds = completedLists; 
 				timer.AddCompletionBonus();
