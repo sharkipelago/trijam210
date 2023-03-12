@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
 	public AudioSource audioSource;
 	public void OnGameOver()
 	{
-		GameOver= true;
+		GameOver = true;
 		gameOverText.text = $"Game Over\r\nRounds Cleared: {clearedRounds}";
 		audioSource.Play();
 	}

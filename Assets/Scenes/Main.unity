@@ -3367,7 +3367,7 @@ AudioSource:
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 128
+  Priority: 107
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500
@@ -15846,7 +15846,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timerText: {fileID: 2072129115}
   gameManager: {fileID: 1175245951}
-  timeRemainingSeconds: 60
+  timeRemainingSeconds: 5
   listCompletionBonus: 20
 --- !u!4 &1963093862
 Transform:
