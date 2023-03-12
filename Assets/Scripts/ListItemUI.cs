@@ -9,6 +9,7 @@ public class ListItemUI : MonoBehaviour
 	[SerializeField] Image itemImage;
 	[SerializeField] TMP_Text itemText;
 
+
 	public void SetItemUI(GroceryObject groceryObject)
 	{
 		itemImage.sprite = groceryObject.Sprite;
@@ -18,7 +19,7 @@ public class ListItemUI : MonoBehaviour
 	public void CheckOff(bool shouldBeCheckedOff)
 	{
 		Color color = itemImage.color;
-		color.a = shouldBeCheckedOff ? 0.5f : 1f;
+		color = shouldBeCheckedOff ? Color.black : Color.white;
 
 		itemImage.color = color;
 	}

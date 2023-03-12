@@ -13,6 +13,7 @@ public class ListManager : MonoBehaviour
 	public bool[] currentListCheckedOff;
 
 	[SerializeField] GroceryListUIManager groceryUIManager;
+	public GameManager gameManager;
 
 	private void Start()
 	{
@@ -58,6 +59,7 @@ public class ListManager : MonoBehaviour
 	// Managing List
 	public void TryCheckOffListItem(GroceryObject targetGrocery)
 	{
+		if(gameManager.GameOver) { return;  }
 		for (int i = 0; i < currentList.Length; i++)
 		{
 			if (targetGrocery.Equals(currentList[i]))
@@ -71,6 +73,8 @@ public class ListManager : MonoBehaviour
 
 	public void UncheckListItem(GroceryObject targetGrocery)
 	{
+		if (gameManager.GameOver) { return; }
+
 		for (int i = 0; i < currentList.Length; i++)
 		{
 			if (targetGrocery.Equals(currentList[i]))
@@ -102,6 +106,8 @@ public class ListManager : MonoBehaviour
 
 	public void MakeHarderList()
 	{
+		if (gameManager.GameOver) { return; }
+
 		currentListDifficulty = Math.Min(currentListDifficulty + 1, 6);
 		GenerateNewShoppingList(currentListDifficulty);
 	}
