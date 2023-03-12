@@ -9,18 +9,21 @@ public class DistractingShopper : MonoBehaviour
 	[SerializeField] ListManager listManager;
 	[SerializeField] GroceryObject desiredObject;
 	[SerializeField] PlayerController player;
+	[SerializeField] DistractingShopperManager distractingShopperManager;
 
 	[SerializeField] Collider2D baseCollider;
 	[SerializeField] Collider2D trigger;
+	public Vector3 originalPosition;
 
 	Vector3 lerpDestination;
 	public int angerLevel = 0;
 	public bool ascending = false;
+	public bool ascended = false;
 	// Start is called before the first frame update
-	void Start()
+	void Awake()
 	{
 		lerpDestination = new Vector3(transform.position.x, transform.position.y + 30, transform.position.z);
-
+		originalPosition = transform.position;
 	}
 
 	// Update is called once per frame
@@ -29,12 +32,20 @@ public class DistractingShopper : MonoBehaviour
 		if (ascending)
 		{
 			transform.position = Vector3.Lerp(transform.position, lerpDestination, Time.deltaTime);
+			if (transform.position.Equals(lerpDestination))
+			{
+				ascending = false;
+				ascended= true;
+				distractingShopperManager.ResetShopperPosition(this);
+			}
 		}
 	}
 
-	public void OnPlaced()
+	public void OnActivated()
 	{
 		desiredObject = listManager.GetRandomGrocery();
+		baseCollider.enabled = true;
+		trigger.enabled = true;
 	}
 
 	public void OnPlayerCompletesList()

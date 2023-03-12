@@ -8,6 +8,7 @@ public class Register : MonoBehaviour
 	[SerializeField] ListManager listManager;
 	[SerializeField] Timer timer;
 	[SerializeField] GameManager gameManager;
+	[SerializeField] DistractingShopperManager shopperManager;
 	[SerializeField] DistractingShopper[] shoppers;
  
 	int completedLists = 0;
@@ -24,6 +25,7 @@ public class Register : MonoBehaviour
 				completedLists++;
 				timer.AddCompletionBonus();
 				listManager.MakeHarderList();
+				shopperManager.OnPlayerCompleteList(listManager.currentListDifficulty);
 				UpdateShoppersDesiredGrocery();
 				return;
 			}
