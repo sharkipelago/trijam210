@@ -17,4 +17,12 @@ public class GameManager : MonoBehaviour
 		audioSource.Play();
 	}
 
+	private void Update()
+	{
+		if (Input.GetKeyUp(KeyCode.Escape))
+		{
+			Application.Quit();
+		}
+	}
+
 }
